@@ -1,6 +1,9 @@
 # Wordpress - ignore core, configuration, examples, uploads and logs.
 # https://github.com/github/gitignore/blob/main/WordPress.gitignore
 
+# IDE Files
+/.idea
+
 # Core
 #
 # Note: if you want to stage/commit WP core files
@@ -21,7 +24,7 @@
 wp-config.php
 
 # Example themes
-/wp-content/themes/twenty*/
+#/wp-content/themes/
 
 # Example plugin
 /wp-content/plugins/hello.php
@@ -35,14 +38,23 @@ wp-config.php
 # htaccess
 /.htaccess
 
-# All plugins
-#
-# Note: If you wish to whitelist plugins,
-# uncomment the next line
-#/wp-content/plugins
+# All "wp-content" folder content, but keep the wp-content folder
+!/wp-content
+/wp-content/*
 
-# All themes
 #
-# Note: If you wish to whitelist themes,
-# uncomment the next line
-#/wp-content/themes
+# Plugins
+#
+!/wp-content/plugins
+/wp-content/plugins/*
+
+# Note: If you wish to whitelist plugins, add them below
+!/wp-content/plugins/softuni-games-plg
+
+
+# Ignore the themes in general
+!/wp-content/themes
+/wp-content/themes/*
+#
+# Note: If you wish to whitelist themes
+!/wp-content/themes/softuni-games-thm
