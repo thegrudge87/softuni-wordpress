@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1><?php wp_title('') ?></h1>
-                    <span class="breadcrumb"><a href="<?php echo get_home_url();?>"><?php _e('Home', SUT_Games::$text_domain); ?></a> <?php wp_title(); ?></span>
+                    <span class="breadcrumb"><a href="<?php echo get_home_url();?>"><?php _e('Home', SUT_Games::get_text_domain()); ?></a> <?php wp_title(); ?></span>
                 </div>
             </div>
         </div>
