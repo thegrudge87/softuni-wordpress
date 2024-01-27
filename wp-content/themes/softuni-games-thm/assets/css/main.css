@@ -1339,6 +1339,31 @@ Shop Page Style
   color: #fff;
 }
 
+.navigation.pagination{
+  justify-content: center;
+}
+
+.navigation.pagination .nav-links a,
+.navigation.pagination .nav-links span{
+  display: inline-block;
+  text-align: center;
+  vertical-align: center;
+  margin: 0 .25em;
+  padding: 0 .5em;
+  min-width: 2.5em;
+  height: 2.5em;
+  line-height: 2.5em;
+  border-radius: 1.75em;
+  background-color: #eee;
+  color: #1e1e1e;
+}
+
+.navigation.pagination .nav-links a:hover,
+.navigation.pagination .nav-links span{
+  background-color: #0071f8;
+  color: #fff
+;
+}
 
 /* 
 ---------------------------------------------
