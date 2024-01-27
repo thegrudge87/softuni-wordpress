@@ -105,8 +105,12 @@ p {
 }
 
 img {
-  width: 100%;
+  max-width: 100%;
   overflow: hidden;
+}
+
+.thumb img{
+  width: 100%;
 }
 
 /* 
