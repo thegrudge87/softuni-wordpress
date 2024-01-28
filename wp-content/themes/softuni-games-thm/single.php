@@ -31,7 +31,16 @@
                             <h2><?php the_title(); ?></h2>
                             <div>
                                 <span><?php echo get_the_author_posts_link() ?></span> |
-                                <span><?php echo get_the_date( 'F jS, Y', $post->ID ); ?></span>
+								<?php
+								$archive_year  = get_the_time( 'Y' );
+								$archive_month = get_the_time( 'm' );
+								$archive_day   = get_the_time( 'd' );
+								?>
+                                <span>
+                                    <a href="<?php echo get_day_link( $archive_year, $archive_month, $archive_day ); ?>">
+                                        <?php echo get_the_date( 'F jS, Y', $post->ID ); ?>
+                                    </a>
+                                </span>
                             </div>
                             <h6></h6>
                         </div>
