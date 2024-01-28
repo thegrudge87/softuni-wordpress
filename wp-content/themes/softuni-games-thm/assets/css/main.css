@@ -113,6 +113,10 @@ img {
   width: 100%;
 }
 
+main{
+  min-height: calc(25vh);
+}
+
 /* 
 ---------------------------------------------
 Global Styles
