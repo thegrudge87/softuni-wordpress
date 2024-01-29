@@ -12,3 +12,10 @@
  * Text Domain:       softuni-games-plg
  * Domain Path:       /languages
  */
+
+require 'includes/class-sup-games.php';
+require 'includes/class-cpt-games.php';
+
+use SUP_Games\SUP_Games as SUP_Games;
+
+$plugin = new SUP_Games();
