@@ -121,8 +121,8 @@ class CPT_Games {
 	}
 
 	/**
-     * Adds additional form fields for the custom meta boxes in the custom Game Genre taxonomy
-     *
+	 * Adds additional form fields for the custom meta boxes in the custom Game Genre taxonomy
+	 *
 	 * @param $term
 	 * @param $taxonomy
 	 *
@@ -146,8 +146,10 @@ class CPT_Games {
                     <a href="#" class="sup-remove"><?php _e( 'Remove image', SUP_Games::get_text_domain() ); ?></a>
                     <input type="hidden" name="sup_img" value="<?php echo absint( $image_id ) ?>">
 				<?php else : ?>
-                    <a href="#" class="button sup-upload"><?php _e( 'Upload image', SUP_Games::get_text_domain() ); ?></a>
-                    <a href="#" class="sup-remove" style="display:none"><?php _e( 'Remove image', SUP_Games::get_text_domain() ); ?></a>
+                    <a href="#"
+                       class="button sup-upload"><?php _e( 'Upload image', SUP_Games::get_text_domain() ); ?></a>
+                    <a href="#" class="sup-remove"
+                       style="display:none"><?php _e( 'Remove image', SUP_Games::get_text_domain() ); ?></a>
                     <input type="hidden" name="sup_img" value="">
 				<?php endif; ?>
             </td>
@@ -176,13 +178,13 @@ class CPT_Games {
 	public function add_game_genre_new_columns( $columns ): array {
 		$newCol["sup_img"] = __( 'Thumbnail', SUP_Games::get_text_domain() );
 
-        // Add the new column as first column
+		// Add the new column as first column
 		return array_merge( $newCol, $columns );
 	}
 
 	/**
-     * Add a content in the new custom columns for the Game Genre Taxonomy
-     *
+	 * Add a content in the new custom columns for the Game Genre Taxonomy
+	 *
 	 * @param $content
 	 * @param $column_name
 	 * @param $term_id
@@ -191,16 +193,16 @@ class CPT_Games {
 	 */
 	function add_game_genre_column_content( $content, $column_name, $term_id ) {
 
-        switch ($column_name){
-            case 'sup_img':
-	            $image_id = get_term_meta( $term_id, $column_name, true );
-	            if ( $image = wp_get_attachment_image_url( $image_id ) ) {
-		            $content .= '<img style="width:80px" src="' . esc_url( $image ) . '" alt=""/>';
-	            }
-                break;
-            default:
-                break;
-        }
+		switch ( $column_name ) {
+			case 'sup_img':
+				$image_id = get_term_meta( $term_id, $column_name, true );
+				if ( $image = wp_get_attachment_image_url( $image_id ) ) {
+					$content .= '<img style="width:80px" src="' . esc_url( $image ) . '" alt=""/>';
+				}
+				break;
+			default:
+				break;
+		}
 
 		return $content;
 	}
