@@ -26,7 +26,7 @@ class CPT_Games {
 	/**
 	 * @return void
 	 */
-	function register_games_post_type() {
+	public function register_games_post_type() {
 		$args = [
 			'label'               => esc_html__( 'Games', SUP_Games::get_text_domain() ),
 			'labels'              => [
@@ -128,7 +128,7 @@ class CPT_Games {
 	 *
 	 * @return void
 	 */
-	function game_genre_edit_term_fields( $term, $taxonomy ) {
+	public function game_genre_edit_term_fields( $term, $taxonomy ) {
 
 		// get meta data value
 		$image_id = get_term_meta( $term->term_id, 'sup_img', true );
@@ -162,7 +162,7 @@ class CPT_Games {
 	 *
 	 * @return void
 	 */
-	function game_genre_save_term_fields( $term_id ) {
+	public function game_genre_save_term_fields( $term_id ) {
 
 		update_term_meta( $term_id, 'sup_img', absint( $_POST['sup_img'] ) );
 
@@ -191,7 +191,7 @@ class CPT_Games {
 	 *
 	 * @return mixed|string
 	 */
-	function add_game_genre_column_content( $content, $column_name, $term_id ) {
+	public function add_game_genre_column_content( $content, $column_name, $term_id ) {
 
 		switch ( $column_name ) {
 			case 'sup_img':
