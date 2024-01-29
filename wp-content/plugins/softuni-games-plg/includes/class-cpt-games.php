@@ -73,7 +73,7 @@ class CPT_Games {
 			],
 			'taxonomies'          => [
 				'category',
-				'tag',
+				'post_tag',
 			],
 			'rewrite'             => true
 		];
