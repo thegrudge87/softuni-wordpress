@@ -232,6 +232,14 @@ if ( ! class_exists( 'CPT_Games' ) ) :
 				'game',
 				'side'
 			);
+
+			add_meta_box(
+				'is_trending',
+				__( 'Is Trending?', SUP_Games::get_text_domain() ),
+				array( $this, 'robots_trending_metabox_callback' ),
+				'game',
+				'side'
+			);
 		}
 
 		/**
@@ -272,9 +280,31 @@ if ( ! class_exists( 'CPT_Games' ) ) :
 			$num_of_likes = isset( $_POST['num_of_likes'] )
 				? esc_attr( $_POST['num_of_likes'] )
 				: 0;
-
 			update_post_meta( $post_id, 'num_of_likes', $num_of_likes );
+
+            // Checks and updates "is_trending" metabox
+            $trending = isset( $_POST['is_trending']) ? esc_attr($_POST['is_trending']) : false;
+			update_post_meta( $post_id, 'is_trending', $trending );
+
 		}
+
+		/**
+         * Callback function for the "Is Trending" metabox
+         *
+		 * @param WP_Post $post
+		 *
+		 * @return void
+		 */
+		public function robots_trending_metabox_callback( WP_Post $post ) {
+			$checked = get_post_meta( $post->ID, 'is_trending', true );
+			?>
+            <div>
+                <label for='is_trending'><?php _e('Is Trending?', SUP_Games::get_text_domain()); ?></label>
+                <input id='is_trending' name='is_trending' type='checkbox' value='1' <?php checked( $checked, 1, true ); ?>/>
+            </div>
+			<?php
+		}
+
 	}
 
 endif;
