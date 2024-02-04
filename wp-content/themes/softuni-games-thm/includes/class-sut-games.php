@@ -25,6 +25,8 @@ class SUT_Games {
 		// Register Sidebar/Widget areas
 		add_action('widgets_init', array( $this, 'register_footer_widget_area' ));
 
+		$settings = new SUT_Settings();
+
 	}
 
 	/**
