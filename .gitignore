@@ -3,6 +3,7 @@
 
 # IDE Files
 /.idea
+/local-xdebuginfo.php
 
 # Core
 #
