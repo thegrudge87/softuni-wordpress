@@ -1144,14 +1144,22 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  color: #fff;
+}
+
+footer *{
+  color: #fff;
 }
 
 footer p {
   text-align: center;
-  line-height: 90px;
   color: #fff;
   font-size: 16px;
   font-weight: 400;
+}
+
+footer .credits {
+  line-height: 90px;
 }
 
 footer p a {
