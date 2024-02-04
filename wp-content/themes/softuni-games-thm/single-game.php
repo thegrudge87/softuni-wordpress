@@ -34,7 +34,7 @@ use SUP_Games\SUP_Games;
 							<?php if ( has_post_thumbnail() ): ?>
 								<?php the_post_thumbnail(); ?>
 							<?php else: ?>
-                                <img src="assets/images/single-game.jpg" alt="">
+                                <img src="assets/images/single-game.jpg" alt="Cover: <?php the_title(); ?>">
 							<?php endif; ?>
                         </div>
                     </div>
@@ -42,8 +42,17 @@ use SUP_Games\SUP_Games;
 
                         <h4><?php the_title(); ?></h4>
 
-                        <span class="price"><em>$28</em> $22</span>
-                        <p><?php the_excerpt(); ?></p>
+						<?php $likes = get_post_meta( $post->ID, 'num_of_likes', true ) ?: 0; ?>
+						<?php if ( $likes > 0 ) : ?>
+                            <span class="likes">
+                                <span data-likes="<?php echo $likes ?>"><?php echo $likes ?></span>
+                                <i class="fa-regular fa-heart"></i>
+                            </span>
+						<?php else: ?>
+                            <span class="likes"><span data-likes="0"></span><i class="fa-regular fa-heart"></i></span>
+						<?php endif; ?>
+
+						<?php the_excerpt(); ?>
 
                         <ul>
                             <li class="text-capitalize">
@@ -129,10 +138,10 @@ use SUP_Games\SUP_Games;
                                          aria-labelledby="reviews-tab">
 										<?php if ( comments_open() || get_comments_number( $post->ID ) ) : ?>
 											<?php
-                                                $comments = get_comments( array(
-                                                    'post_id' => $post->ID,
-                                                    'status'  => 'approve'
-                                                ) );
+											$comments = get_comments( array(
+												'post_id' => $post->ID,
+												'status'  => 'approve'
+											) );
 											?>
 											<?php foreach ( $comments as $comment ) : ?>
 												<?php get_template_part( 'partials/comment', 'game' ) ?>
@@ -147,6 +156,7 @@ use SUP_Games\SUP_Games;
             </div>
         </div>
 
+		<?php // TODO: make dynamic the related games section ?>
         <div class="section categories related-games">
             <div class="container">
                 <div class="row">

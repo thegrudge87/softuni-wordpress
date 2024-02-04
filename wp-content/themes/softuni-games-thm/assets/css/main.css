@@ -758,7 +758,8 @@ Banner Style
   border-radius: 25px;
 }
 
-.main-banner .right-image span.price {
+.main-banner .right-image span.price,
+.main-banner .right-image span.likes {
   position: absolute;
   right: 20px;
   top: 20px;
@@ -856,7 +857,8 @@ Trending Style
   overflow: hidden;
 }
 
-.trending .item span.price em {
+.trending .item span.price em,
+.trending .item span.likes em {
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -864,7 +866,8 @@ Trending Style
   display: block;
 }
 
-.trending .item span.price {
+.trending .item span.price,
+.trending .item span.likes {
   text-align: right;
   position: absolute;
   right: 20px;
@@ -1256,7 +1259,8 @@ Shop Page Style
   overflow: hidden;
 }
 
-.trending-box .item span.price em {
+.trending-box .item span.price em,
+.trending-box .item span.likes em {
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -1264,7 +1268,8 @@ Shop Page Style
   display: block;
 }
 
-.trending-box .item span.price {
+.trending-box .item span.price,
+.trending-box .item span.likes {
   text-align: right;
   position: absolute;
   right: 20px;
@@ -1402,13 +1407,15 @@ Single Page Style
   margin-bottom: 20px;
 }
 
-.single-product span.price {
+.single-product span.price,
+.single-product span.likes {
   font-size: 27px;
   font-weight: 700;
   color: #0071f8;
 }
 
-.single-product span.price em {
+.single-product span.price em,
+.single-product span.likes em {
   font-style: normal;
   color: #c8c8c8;
   font-size: 17px;
