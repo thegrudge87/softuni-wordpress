@@ -32,7 +32,7 @@ if ( ! class_exists( 'CPT_Games' ) ) :
 			add_action( 'add_meta_boxes', array( $this, 'register_game_meta_boxes' ) );
 
 			// Save Metabox Actions
-			add_action('save_post_game', array( $this, 'save_game_meta' ) );
+			add_action( 'save_post_game', array( $this, 'save_game_meta' ) );
 		}
 
 
@@ -243,35 +243,35 @@ if ( ! class_exists( 'CPT_Games' ) ) :
 		 */
 		public function robots_likes_metabox_callback( WP_Post $post ) {
 
-            // Get post data if there is, or set as 0 (zero)
+			// Get post data if there is, or set as 0 (zero)
 			$num_of_likes = get_post_meta( $post->ID, 'num_of_likes', true ) ?: 0;
 			?>
             <div>
                 <label for="num_of_likes"><?php _e( 'Number of Likes', SUP_Games::get_text_domain() ); ?></label>
                 <input id="num_of_likes" name="num_of_likes" type="number" min="0" step="1"
-                       value="<?php echo esc_attr( $num_of_likes ); ?>" />
+                       value="<?php echo esc_attr( $num_of_likes ); ?>"/>
             </div>
 			<?php
 		}
 
 		/**
-         * Save "Number of Likes" post metadata
-         *
+		 * Save "Number of Likes" post metadata
+		 *
 		 * @param int|null $post_id
 		 *
 		 * @return void
 		 */
-		public function save_game_meta ( ?int $post_id ) {
+		public function save_game_meta( ?int $post_id ) {
 
-            // Guard check, do we have a provided $post_id
+			// Guard check, do we have a provided $post_id
 			if ( empty( $post_id ) ) {
 				return;
 			}
 
-            // check do we have a number of likes, otherwise consider it as equal to 0 (zero)
+			// check do we have a number of likes, otherwise consider it as equal to 0 (zero)
 			$num_of_likes = isset( $_POST['num_of_likes'] )
-                ? esc_attr( $_POST['num_of_likes'] )
-                : 0;
+				? esc_attr( $_POST['num_of_likes'] )
+				: 0;
 
 			update_post_meta( $post_id, 'num_of_likes', $num_of_likes );
 		}
