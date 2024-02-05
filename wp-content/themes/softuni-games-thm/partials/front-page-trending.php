@@ -54,3 +54,4 @@ $trending_posts = new WP_Query( $trending_query_args );
     </div>
 
 <?php endif; ?>
+<?php wp_reset_postdata(); ?>

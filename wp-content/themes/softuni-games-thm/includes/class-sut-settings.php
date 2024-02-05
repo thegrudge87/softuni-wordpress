@@ -17,13 +17,19 @@ class SUT_Settings {
 	 * @return void
 	 */
 	public function menu_page_register() {
-		add_menu_page(
-			__( 'SoftUni Games', SUT_Games::get_text_domain() ),
-			__( 'SoftUni Games', SUT_Games::get_text_domain() ),
-			'manage_options',
-			$this->main_menu_slug,
-			array( $this, 'menu_page_content' )
-		);
+
+        // Add the Main Menu only if it's not registered already
+		if ( empty ( $GLOBALS['admin_page_hooks'][$this->main_menu_slug] ) ){
+			add_menu_page(
+				__( 'SoftUni Games', SUT_Games::get_text_domain() ),
+				__( 'SoftUni Games', SUT_Games::get_text_domain() ),
+				'manage_options',
+				$this->main_menu_slug,
+				array( $this, 'menu_page_content' ),
+				get_theme_file_uri('/assets/images/softuni-wizard-logo.png'),
+			);
+        }
+
 		add_submenu_page(
 			$this->main_menu_slug,
 			__( 'Theme Options', SUT_Games::get_text_domain() ),
