@@ -11,6 +11,8 @@ class SUT_Settings {
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'menu_page_register' ) );
 		add_action( 'admin_init', array( $this, 'theme_settings_register' ) );
+
+		add_filter( 'pre_get_posts', array($this, 'number_of_games_on_archive') );
 	}
 
 	/**
@@ -94,6 +96,7 @@ class SUT_Settings {
 		add_option( 'sut_banner_text', null );
 
 		add_option( 'sut_show_max_related_games', 5 );
+		add_option( 'sut_show_games_per_page', 6 );
 
 		$main_title_args = array(
 			'type'              => 'string',
@@ -110,6 +113,7 @@ class SUT_Settings {
 			'default'           => 5
 		);
 		register_setting( 'sut_general', 'sut_show_max_related_games', $max_show_arg );
+		register_setting( 'sut_general', 'sut_show_games_per_page', $max_show_arg );
 
 		/**
 		 * Register General Settings section
@@ -138,6 +142,15 @@ class SUT_Settings {
 			$this->theme_options_slug . '-general',
 			'sut_general_options',
 			array( 'label_for' => 'sut_show_max_related_games' )
+		);
+
+		add_settings_field(
+			'sut_show_games_per_page_field',
+			__( 'Show Games Per Page', SUT_Games::get_text_domain() ),
+			array( $this, 'sut_show_games_per_page_callback' ),
+			$this->theme_options_slug . '-general',
+			'sut_general_options',
+			array( 'label_for' => 'sut_show_games_per_page' )
 		);
 
 		add_settings_field(
@@ -205,6 +218,17 @@ class SUT_Settings {
 		<?php
     }
 
+	public function sut_show_games_per_page_callback(  ) {
+		$max_games = get_option('sut_show_games_per_page');
+		?>
+        <div><input type="number" name="sut_show_games_per_page" id="sut_show_games_per_page"
+                    value="<?php echo $max_games; ?>"/></div>
+        <div>
+            <small><em><?php _e( 'This the number of games that will be shown per page.', SUT_Games::get_text_domain() ); ?></em></small>
+        </div>
+		<?php
+	}
+
 	/**
 	 * Main title settings field HTML markup
 	 *
@@ -249,5 +273,19 @@ class SUT_Settings {
             <small><em><?php _e( 'Type in the paragraph text that should be visible on the homepage', SUT_Games::get_text_domain() ); ?></em></small>
         </div>
 		<?php
+	}
+
+	/**
+	 * @param $query
+	 *
+	 * @return mixed
+	 */
+	public function number_of_games_on_archive( $query ) {
+
+		if ( is_post_type_archive( array( 'game' ) ) ) {
+			$query->set( 'posts_per_page', get_option('sut_show_games_per_page') ?: 6 );
+		}
+
+		return $query;
 	}
 }

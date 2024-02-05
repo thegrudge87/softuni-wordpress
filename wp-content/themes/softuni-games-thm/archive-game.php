@@ -16,12 +16,36 @@
 
     <div class="container">
         <div class="row">
+			<?php
+			wp_reset_query();
+			if ( get_query_var( 'paged' ) ) {
+				$paged = get_query_var( 'paged' );
+			} else if ( get_query_var( 'page' ) ) {
+				$paged = get_query_var( 'page' );
+			} else {
+				$paged = 1;
+			}
+			$games_query = array(
+				'post_type'              => 'game',
+				'post_status'            => 'publish',
+				'posts_per_page'         => get_option( 'sut_show_games_per_page' ) ?: 6,
+				'posts_per_archive_page' => get_option( 'sut_show_games_per_page' ) ?: 6,
+				'paged'                  => $paged,
+				'orderby'                => 'ID',
+				'order'                  => 'DESC',
+				'update_post_term_cache' => false,
+				'update_post_meta_cache' => false
+			);
 
-			<?php if ( have_posts() ) : ?>
+			$games = new WP_Query( $games_query );
+			?>
 
-				<?php while ( have_posts() ) : the_post(); ?>
 
-					<div class="col-md-6 col-lg-4 categories">
+			<?php if ( $games->have_posts() ) : ?>
+
+				<?php while ( $games->have_posts() ) : $games->the_post(); ?>
+
+                    <div class="col-md-6 col-lg-4 categories">
 						<?php get_template_part( 'partials/list-item', 'post' ); ?>
                     </div>
 
@@ -44,6 +68,7 @@
                 </div>
 
 			<?php endif; ?>
+			<?php wp_reset_postdata(); ?>
 
             <div class="col-lg-6 align-self-center">
 

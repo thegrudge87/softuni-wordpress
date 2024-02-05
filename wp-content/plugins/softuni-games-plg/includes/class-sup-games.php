@@ -59,9 +59,6 @@ if ( ! class_exists( 'SUP_Games' ) ) :
 			);
 		}
 
-		/**
-		 * @param string $version
-		 */
 	}
 
 endif;

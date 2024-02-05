@@ -1383,7 +1383,7 @@ Shop Page Style
 }
 
 .navigation.pagination .nav-links a:hover,
-.navigation.pagination .nav-links span{
+.navigation.pagination .nav-links span:not(.dots){
   background-color: #0071f8;
   color: #fff
 ;
