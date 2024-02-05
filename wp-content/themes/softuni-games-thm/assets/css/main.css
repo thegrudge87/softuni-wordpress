@@ -398,15 +398,15 @@ Header Style
   letter-spacing: .25px;
 }
 
-.header-area .main-nav .nav li:last-child a {
-  background-color: #ee626b;
-  text-transform: uppercase;
-  font-weight: 500;
-}
+/*.header-area .main-nav .nav li:last-child a {*/
+/*  background-color: #ee626b;*/
+/*  text-transform: uppercase;*/
+/*  font-weight: 500;*/
+/*}*/
 
-.header-area .main-nav .nav li:last-child:hover a {
-  background-color: #ee626b;
-}
+/*.header-area .main-nav .nav li:last-child:hover a {*/
+/*  background-color: #ee626b;*/
+/*}*/
 
 .header-area .main-nav .nav li:hover a {
   background-color: rgba(255, 255, 255, 0.10);

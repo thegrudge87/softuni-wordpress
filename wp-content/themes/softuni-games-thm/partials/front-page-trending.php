@@ -1,4 +1,10 @@
 <?php
+
+// Guard check, if the custom post type do not exist -> do nothing;
+if ( ! post_type_exists( 'game' ) ) {
+    return;
+}
+
 $trending_query_args = array(
 	'post_type'      => 'game',
 	'post_status'    => 'publish',
@@ -9,9 +15,9 @@ $trending_query_args = array(
 	'order'          => 'ASC',
 	'meta_query'     => array(
 		array(
-			'key'      => 'is_trending',
-			'value'    => 1,
-			'compare'  => '=',
+			'key'     => 'is_trending',
+			'value'   => 1,
+			'compare' => '=',
 		)
 	)
 );

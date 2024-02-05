@@ -18,17 +18,17 @@ class SUT_Settings {
 	 */
 	public function menu_page_register() {
 
-        // Add the Main Menu only if it's not registered already
-		if ( empty ( $GLOBALS['admin_page_hooks'][$this->main_menu_slug] ) ){
+		// Add the Main Menu only if it's not registered already
+		if ( empty ( $GLOBALS['admin_page_hooks'][ $this->main_menu_slug ] ) ) {
 			add_menu_page(
 				__( 'SoftUni Games', SUT_Games::get_text_domain() ),
 				__( 'SoftUni Games', SUT_Games::get_text_domain() ),
 				'manage_options',
 				$this->main_menu_slug,
 				array( $this, 'menu_page_content' ),
-				get_theme_file_uri('/assets/images/softuni-wizard-logo.png'),
+				get_theme_file_uri( '/assets/images/softuni-wizard-logo.png' ),
 			);
-        }
+		}
 
 		add_submenu_page(
 			$this->main_menu_slug,
@@ -75,7 +75,7 @@ class SUT_Settings {
 				<?php
 				if ( $active_tab == 'general' ) {
 					echo 'general';
-                    //TODO: To add the settings in the General Tab
+					//TODO: To add the settings in the General Tab
 				} else {
 					settings_fields( 'sut_banner' );
 					do_settings_sections( $this->theme_options_slug . '-banner' );
@@ -145,7 +145,7 @@ class SUT_Settings {
 	}
 
 	public function section_callback( $section_passed ) {
-        _e("<p>Configure the banner on the Home page. If the main & secondary titles are not set, the banner won't be visualized.<p>", SUT_Games::get_text_domain());
+		_e( "<p>Configure the banner on the Home page. If the main & secondary titles are not set, the banner won't be visualized.<p>", SUT_Games::get_text_domain() );
 	}
 
 	/**
