@@ -12,33 +12,34 @@ use SUP_Games\CPT_Games as CPT_Games;
 
 if ( ! class_exists( 'SUP_Games' ) ) :
 
-class SUP_Games {
-	private static $text_domain = 'softuni-games-plg';
-	private static $version = '0.1.0';
+	class SUP_Games {
+		private static $text_domain = 'softuni-games-plg';
+		private static $version = '0.1.0';
 
-	public function __construct() {
+		public function __construct() {
 
-		// Load and call all CTP & Metaboxes
-		$games = new CPT_Games();
+			// Load and call all CTP & Metaboxes
+			$games      = new CPT_Games();
+			$shortcodes = new SUP_Shortcodes();
 
-		add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_assets'));
-	}
+			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
+		}
 
-	/**
-	 * @return string
-	 */
-	public static function get_text_domain(): string {
-		return self::$text_domain;
-	}
+		/**
+		 * @return string
+		 */
+		public static function get_text_domain(): string {
+			return self::$text_domain;
+		}
 
-	/**
-	 * @return string
-	 */
-	public static function get_version(): string {
-		return self::$version;
-	}
+		/**
+		 * @return string
+		 */
+		public static function get_version(): string {
+			return self::$version;
+		}
 
-	public function enqueue_admin_assets() {
+		public function enqueue_admin_assets() {
 
 			// WordPress media uploader scripts
 			if ( ! did_action( 'wp_enqueue_media' ) ) {
@@ -52,11 +53,15 @@ class SUP_Games {
 				array( 'jquery' ),
 				self::get_version(),
 				array(
-					'strategy' => 'defer',
+					'strategy'  => 'defer',
 					'in_footer' => 'true',
 				)
 			);
+		}
+
+		/**
+		 * @param string $version
+		 */
 	}
-}
 
 endif;
