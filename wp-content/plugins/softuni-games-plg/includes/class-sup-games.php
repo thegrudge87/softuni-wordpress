@@ -9,6 +9,7 @@
 namespace SUP_Games;
 
 use SUP_Games\CPT_Games as CPT_Games;
+use SUP_Games\SUP_Http as SUP_Http;
 
 if ( ! class_exists( 'SUP_Games' ) ) :
 
@@ -18,10 +19,10 @@ if ( ! class_exists( 'SUP_Games' ) ) :
 
 		public function __construct() {
 
-			// Load and call all CTP & Metaboxes
 			$games      = new CPT_Games();
 			$shortcodes = new SUP_Shortcodes();
 			$settings   = new SUP_Settings();
+			$http       = new SUP_Http();
 
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
 		}
@@ -50,7 +51,7 @@ if ( ! class_exists( 'SUP_Games' ) ) :
 			// our custom JS
 			wp_enqueue_script(
 				'sup-script-js',
-				plugins_url( 'js/scripts.js', __DIR__ ),
+				plugins_url( 'assets/js/scripts.js', __DIR__ ),
 				array( 'jquery' ),
 				self::get_version(),
 				array(

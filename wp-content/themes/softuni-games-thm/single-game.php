@@ -42,14 +42,27 @@ use SUP_Games\SUP_Games;
 
                         <h4><?php the_title(); ?></h4>
 
-						<?php $likes = get_post_meta( $post->ID, 'num_of_likes', true ) ?: 0; ?>
+						<?php
+						$likes      = get_post_meta( $post->ID, 'num_of_likes', true ) ?: 0;
+						$user_likes = \SUP_Games\SUP_Http::get_likes_cookie_data();
+						?>
+
 						<?php if ( $likes > 0 ) : ?>
-                            <span class="likes">
-                                <span data-likes="<?php echo $likes ?>"><?php echo $likes ?></span>
-                                <i class="fa-regular fa-heart"></i>
-                            </span>
+							<?php if ( in_array( $post->ID, $user_likes ) ): ?>
+                                <span class="likes liked">
+                                    <span data-likes="<?php echo $likes ?>"><?php echo $likes ?></span>
+                                    <i class="fa-solid fa-heart"></i>
+                                </span>
+							<?php else: ?>
+                                <span class="likes" data-game-id="<?php echo $post->ID; ?>">
+                                    <span data-likes="<?php echo $likes ?>"><?php echo $likes ?></span>
+                                    <i class="fa-regular fa-heart"></i>
+                                </span>
+							<?php endif; ?>
 						<?php else: ?>
-                            <span class="likes"><span data-likes="0"></span><i class="fa-regular fa-heart"></i></span>
+                            <span class="likes" data-game-id="<?php echo $post->ID; ?>">
+                                <span data-likes="0"></span><i class="fa-regular fa-heart"></i>
+                            </span>
 						<?php endif; ?>
 
 						<?php the_excerpt(); ?>

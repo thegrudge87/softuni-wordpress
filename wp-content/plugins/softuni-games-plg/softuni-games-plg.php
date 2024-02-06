@@ -17,6 +17,7 @@ require 'includes/class-sup-games.php';
 require 'includes/class-cpt-games.php';
 require 'includes/class-sup-shortcodes.php';
 require 'includes/class-sup-settings.php';
+require 'includes/class-sup-http.php';
 
 use SUP_Games\SUP_Games as SUP_Games;
 
