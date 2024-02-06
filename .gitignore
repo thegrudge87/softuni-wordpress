@@ -44,6 +44,11 @@ wp-config.php
 /wp-content/*
 
 #
+# ACF Files
+#
+!/wp-content/acf-jsons
+
+#
 # Plugins
 #
 !/wp-content/plugins
