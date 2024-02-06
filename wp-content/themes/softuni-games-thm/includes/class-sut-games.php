@@ -1,5 +1,7 @@
 <?php
 
+use SUT_Games\SUT_Settings;
+
 /**
  * @desc  General class for the Theme details.
  *

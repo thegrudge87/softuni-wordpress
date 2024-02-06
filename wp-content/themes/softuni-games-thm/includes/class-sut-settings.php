@@ -1,5 +1,9 @@
 <?php
 
+namespace SUT_Games;
+
+use SUT_Games;
+
 class SUT_Settings {
 
 	/**
@@ -11,11 +15,10 @@ class SUT_Settings {
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'menu_page_register' ) );
 		add_action( 'admin_init', array( $this, 'theme_settings_register' ) );
-
-		add_filter( 'pre_get_posts', array($this, 'number_of_games_on_archive') );
 	}
 
 	/**
+     * Register the menu page and sub-menu pages.
 	 * @return void
 	 */
 	public function menu_page_register() {
@@ -53,6 +56,10 @@ class SUT_Settings {
 		<?php
 	}
 
+	/**
+     * Output the HTML markup for the "Theme Options" menu page
+	 * @return void
+	 */
 	public function theme_sub_menu_content() {
 		?>
         <div class="wrap">
@@ -90,13 +97,15 @@ class SUT_Settings {
 		<?php
 	}
 
+	/**
+     * Register new options & settings, add settings sections
+     *
+	 * @return void
+	 */
 	public function theme_settings_register() {
 		add_option( 'sut_banner_main_title', null );
 		add_option( 'sut_banner_secondary_title', null );
 		add_option( 'sut_banner_text', null );
-
-		add_option( 'sut_show_max_related_games', 5 );
-		add_option( 'sut_show_games_per_page', 6 );
 
 		$main_title_args = array(
 			'type'              => 'string',
@@ -107,23 +116,6 @@ class SUT_Settings {
 		register_setting( 'sut_banner', 'sut_banner_secondary_title', $main_title_args );
 		register_setting( 'sut_banner', 'sut_banner_text', $main_title_args );
 
-		$max_show_arg = array(
-			'type'              => 'number',
-			'sanitize_callback' => array( $this, 'sanitize_number_field' ),
-			'default'           => 5
-		);
-		register_setting( 'sut_general', 'sut_show_max_related_games', $max_show_arg );
-		register_setting( 'sut_general', 'sut_show_games_per_page', $max_show_arg );
-
-		/**
-		 * Register General Settings section
-		 */
-		add_settings_section(
-			'sut_general_options',
-			'General Settings',
-			array( $this, 'general_section_callback' ),
-			$this->theme_options_slug . '-general'
-		);
 
 		/**
 		 * Register the Banner Settings section
@@ -135,24 +127,10 @@ class SUT_Settings {
 			$this->theme_options_slug . '-banner'
 		);
 
-		add_settings_field(
-			'sut_general_max_related_field',
-			__( 'Display max related Games', SUT_Games::get_text_domain() ),
-			array( $this, 'sut_show_max_related_games_callback' ),
-			$this->theme_options_slug . '-general',
-			'sut_general_options',
-			array( 'label_for' => 'sut_show_max_related_games' )
-		);
 
-		add_settings_field(
-			'sut_show_games_per_page_field',
-			__( 'Show Games Per Page', SUT_Games::get_text_domain() ),
-			array( $this, 'sut_show_games_per_page_callback' ),
-			$this->theme_options_slug . '-general',
-			'sut_general_options',
-			array( 'label_for' => 'sut_show_games_per_page' )
-		);
-
+		/**
+		 * Add Settings Field for the primary "Banner Title"
+		 */
 		add_settings_field(
 			'sut_banner_main_title_field',
 			__( 'Main Banner Title', SUT_Games::get_text_domain() ),
@@ -162,6 +140,9 @@ class SUT_Settings {
 			array( 'label_for' => 'sut_banner_main_title' )
 		);
 
+		/**
+		 * Add Settings Field for the secondary "Banner Title"
+		 */
 		add_settings_field(
 			'sut_banner_secondary_title_field',
 			__( 'Secondary Banner Title', SUT_Games::get_text_domain() ),
@@ -171,6 +152,9 @@ class SUT_Settings {
 			array( 'label_for' => 'sut_banner_secondary_title' )
 		);
 
+		/**
+		 * Add Settings Field for the "Banner Text"
+		 */
 		add_settings_field(
 			'sut_banner_text_field',
 			__( 'Banner Text', SUT_Games::get_text_domain() ),
@@ -182,6 +166,8 @@ class SUT_Settings {
 	}
 
 	/**
+     * Callback to sanitize text options.
+     *
 	 * @param $data
 	 *
 	 * @return string
@@ -190,44 +176,13 @@ class SUT_Settings {
 		return esc_html( $data );
 	}
 
-	/**
-	 * @param $data
-	 *
-	 * @return int
-	 */
-	public function sanitize_number_field( $data ): int {
-        return (int) $data;
-    }
 
-	public function general_section_callback( $section_passed ) {
-		_e( "<p>Configure the banner on the Home page. If the main & secondary titles are not set, the banner won't be visualized.<p>", SUT_Games::get_text_domain() );
-	}
 
 	public function section_callback( $section_passed ) {
 		_e( "<p>Configure the banner on the Home page. If the main & secondary titles are not set, the banner won't be visualized.<p>", SUT_Games::get_text_domain() );
 	}
 
-	public function sut_show_max_related_games_callback(  ) {
-        $max_games = get_option('sut_show_max_related_games');
-		?>
-        <div><input type="number" name="sut_show_max_related_games" id="sut_show_max_related_games"
-                    value="<?php echo $max_games; ?>"/></div>
-        <div>
-            <small><em><?php _e( 'This the max number of games that will be shown in the "Related Games" sections.', SUT_Games::get_text_domain() ); ?></em></small>
-        </div>
-		<?php
-    }
 
-	public function sut_show_games_per_page_callback(  ) {
-		$max_games = get_option('sut_show_games_per_page');
-		?>
-        <div><input type="number" name="sut_show_games_per_page" id="sut_show_games_per_page"
-                    value="<?php echo $max_games; ?>"/></div>
-        <div>
-            <small><em><?php _e( 'This the number of games that will be shown per page.', SUT_Games::get_text_domain() ); ?></em></small>
-        </div>
-		<?php
-	}
 
 	/**
 	 * Main title settings field HTML markup
@@ -247,6 +202,7 @@ class SUT_Settings {
 
 	/**
 	 * Secondary title settings field HTML markup
+     *
 	 * @return void
 	 */
 	public function sut_banner_secondary_title_callback() {
@@ -260,6 +216,11 @@ class SUT_Settings {
 		<?php
 	}
 
+	/**
+     * "Banner Text" settings field HTML markup
+     *
+	 * @return void
+	 */
 	public function sut_banner_text_field_callback() {
 		$banner_text = get_option( 'sut_banner_text' ) ?? '';
 		?>
@@ -275,17 +236,5 @@ class SUT_Settings {
 		<?php
 	}
 
-	/**
-	 * @param $query
-	 *
-	 * @return mixed
-	 */
-	public function number_of_games_on_archive( $query ) {
 
-		if ( is_post_type_archive( array( 'game' ) ) ) {
-			$query->set( 'posts_per_page', get_option('sut_show_games_per_page') ?: 6 );
-		}
-
-		return $query;
-	}
 }
