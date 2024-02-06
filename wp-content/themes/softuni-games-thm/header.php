@@ -52,7 +52,11 @@
                 <nav class="main-nav">
 
                     <!-- ***** Logo Start ***** -->
-					<?php echo get_custom_logo(); ?>
+	                <?php if ( has_custom_logo() ) : ?>
+                        <?php echo get_custom_logo(); ?>
+                    <?php else: ?>
+                        <div class="logo-text mt-4 mt-sm-0"><?php echo bloginfo('name'); ?></div>
+                    <?php endif; ?>
                     <!-- ***** Logo End ***** -->
 
                     <!-- ***** Menu Start ***** -->

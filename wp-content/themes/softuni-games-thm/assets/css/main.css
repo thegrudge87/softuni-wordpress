@@ -184,6 +184,13 @@ body {
   color: #fff;
 }
 
+.logo-text {
+  text-wrap: nowrap;
+  font-size: 1.5rem;
+  color: #fff;
+  line-height: 4rem;
+}
+
 /* 
 ---------------------------------------------
 Pre-loader Style
