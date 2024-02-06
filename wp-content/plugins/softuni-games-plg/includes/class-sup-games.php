@@ -21,6 +21,7 @@ if ( ! class_exists( 'SUP_Games' ) ) :
 			// Load and call all CTP & Metaboxes
 			$games      = new CPT_Games();
 			$shortcodes = new SUP_Shortcodes();
+			$settings   = new SUP_Settings();
 
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
 		}
