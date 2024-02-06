@@ -1,5 +1,3 @@
-console.log(game_likes);
-
 jQuery(document).ready(function($) {
 
     $('.likes').on('click', function(e){
