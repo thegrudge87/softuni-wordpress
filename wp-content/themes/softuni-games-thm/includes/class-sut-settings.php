@@ -67,28 +67,27 @@ class SUT_Settings {
 
 			<?php settings_errors(); ?>
 
-			<?php $active_tab = $_GET['tab'] ?? 'general'; ?>
+            <?php // Set the default tab to be banner-settings ?>
+			<?php $active_tab = $_GET['tab'] ?? 'banner-settings'; ?>
 
             <h2 class="nav-tab-wrapper">
-                <a href="?page=<?php echo $this->theme_options_slug ?>&tab=general"
-                   class="nav-tab <?php echo $active_tab == 'general' ? 'nav-tab-active' : ''; ?>">
-					<?php _e( 'General', SUT_Games::get_text_domain() ); ?>
-                </a>
+<!--                <a href="?page=--><?php //echo $this->theme_options_slug ?><!--&tab=general"-->
+<!--                   class="nav-tab --><?php //echo $active_tab == 'general' ? 'nav-tab-active' : ''; ?><!--">-->
+<!--					--><?php //_e( 'General', SUT_Games::get_text_domain() ); ?>
+<!--                </a>-->
                 <a href="?page=<?php echo $this->theme_options_slug ?>&tab=banner-settings"
                    class="nav-tab <?php echo $active_tab == 'banner-settings' ? 'nav-tab-active' : ''; ?>">
-					<?php _e( 'Home Page Banner', SUT_Games::get_text_domain() ); ?>
+		            <?php _e( 'Home Page Banner', SUT_Games::get_text_domain() ); ?>
                 </a>
             </h2>
 
             <form method="post" action="options.php">
 				<?php
-				if ( $active_tab == 'general' ) {
-					//TODO: To add the settings in the General Tab
-					settings_fields( 'sut_general' );
-					do_settings_sections( $this->theme_options_slug . '-general' );
-				} else {
+				if ( $active_tab == 'banner-settings' ) {
 					settings_fields( 'sut_banner' );
 					do_settings_sections( $this->theme_options_slug . '-banner' );
+				} else {
+					// Add new tab cases.
 				}
 				submit_button()
 				?>

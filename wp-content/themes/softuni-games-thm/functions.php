@@ -20,6 +20,11 @@ function sut_get_related_games( $post_id ) {
 		return;
 	}
 
+    // if ACF plugin is not active - do not proceed
+	if ( ! function_exists( 'get_field' ) ) {
+		return;
+	}
+
 	$max_posts = get_option( 'sut_show_max_related_games' ) ?: 5;
 
 	$related_games = get_field( 'related_games', $post_id );
