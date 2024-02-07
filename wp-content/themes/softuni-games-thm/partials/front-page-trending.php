@@ -39,7 +39,7 @@ $trending_posts = new WP_Query( $trending_query_args );
                 </div>
                 <div class="col-lg-6">
                     <div class="main-button">
-                        <a href="<?php echo get_post_type_archive_link( 'game' ) ?>">View All</a>
+<!--                        <a href="#">View All</a>-->
                     </div>
                 </div>
             </div>

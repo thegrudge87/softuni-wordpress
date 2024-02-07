@@ -41,7 +41,7 @@ class SUP_Shortcodes {
                 </div>
                 <div class="col-lg-6">
                     <div class="main-button">
-                        <a href="#">' . __( 'View All', SUP_Games::get_text_domain() ) . '</a>
+                        <a href="'. get_post_type_archive_link( 'game' ) . '">' . __( 'View All', SUP_Games::get_text_domain() ) . '</a>
                     </div>
                 </div>';
 
