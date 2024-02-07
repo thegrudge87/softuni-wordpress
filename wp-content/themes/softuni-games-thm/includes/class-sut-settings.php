@@ -15,10 +15,12 @@ class SUT_Settings {
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'menu_page_register' ) );
 		add_action( 'admin_init', array( $this, 'theme_settings_register' ) );
+
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
 	}
 
 	/**
-     * Register the menu page and sub-menu pages.
+	 * Register the menu page and sub-menu pages.
 	 * @return void
 	 */
 	public function menu_page_register() {
@@ -57,7 +59,7 @@ class SUT_Settings {
 	}
 
 	/**
-     * Output the HTML markup for the "Theme Options" menu page
+	 * Output the HTML markup for the "Theme Options" menu page
 	 * @return void
 	 */
 	public function theme_sub_menu_content() {
@@ -67,17 +69,18 @@ class SUT_Settings {
 
 			<?php settings_errors(); ?>
 
-            <?php // Set the default tab to be banner-settings ?>
+			<?php // Set the default tab to be banner-settings ?>
 			<?php $active_tab = $_GET['tab'] ?? 'banner-settings'; ?>
 
             <h2 class="nav-tab-wrapper">
-<!--                <a href="?page=--><?php //echo $this->theme_options_slug ?><!--&tab=general"-->
-<!--                   class="nav-tab --><?php //echo $active_tab == 'general' ? 'nav-tab-active' : ''; ?><!--">-->
-<!--					--><?php //_e( 'General', SUT_Games::get_text_domain() ); ?>
-<!--                </a>-->
+                <!--                <a href="?page=--><?php //echo $this->theme_options_slug ?><!--&tab=general"-->
+                <!--                   class="nav-tab -->
+				<?php //echo $active_tab == 'general' ? 'nav-tab-active' : ''; ?><!--">-->
+                <!--					--><?php //_e( 'General', SUT_Games::get_text_domain() ); ?>
+                <!--                </a>-->
                 <a href="?page=<?php echo $this->theme_options_slug ?>&tab=banner-settings"
                    class="nav-tab <?php echo $active_tab == 'banner-settings' ? 'nav-tab-active' : ''; ?>">
-		            <?php _e( 'Home Page Banner', SUT_Games::get_text_domain() ); ?>
+					<?php _e( 'Home Page Banner', SUT_Games::get_text_domain() ); ?>
                 </a>
             </h2>
 
@@ -97,14 +100,15 @@ class SUT_Settings {
 	}
 
 	/**
-     * Register new options & settings, add settings sections
-     *
+	 * Register new options & settings, add settings sections
+	 *
 	 * @return void
 	 */
 	public function theme_settings_register() {
 		add_option( 'sut_banner_main_title', null );
 		add_option( 'sut_banner_secondary_title', null );
 		add_option( 'sut_banner_text', null );
+		add_option( 'sut_banner_image_url', null );
 
 		$main_title_args = array(
 			'type'              => 'string',
@@ -114,6 +118,7 @@ class SUT_Settings {
 		register_setting( 'sut_banner', 'sut_banner_main_title', $main_title_args );
 		register_setting( 'sut_banner', 'sut_banner_secondary_title', $main_title_args );
 		register_setting( 'sut_banner', 'sut_banner_text', $main_title_args );
+		register_setting( 'sut_banner', 'sut_banner_image_url', $main_title_args );
 
 
 		/**
@@ -162,11 +167,23 @@ class SUT_Settings {
 			'sut_banner_options',
 			array( 'label_for' => 'sut_banner_text' )
 		);
+
+		/**
+		 * Add Settings Field for the "Banner Image"
+		 */
+		add_settings_field(
+			'sut_banner_image_field',
+			__( 'Banner Image', SUT_Games::get_text_domain() ),
+			array( $this, 'sut_banner_image_field_callback' ),
+			$this->theme_options_slug . '-banner',
+			'sut_banner_options',
+			array( 'label_for' => 'sut_banner_image' )
+		);
 	}
 
 	/**
-     * Callback to sanitize text options.
-     *
+	 * Callback to sanitize text options.
+	 *
 	 * @param $data
 	 *
 	 * @return string
@@ -176,11 +193,9 @@ class SUT_Settings {
 	}
 
 
-
 	public function section_callback( $section_passed ) {
 		_e( "<p>Configure the banner on the Home page. If the main & secondary titles are not set, the banner won't be visualized.<p>", SUT_Games::get_text_domain() );
 	}
-
 
 
 	/**
@@ -201,7 +216,7 @@ class SUT_Settings {
 
 	/**
 	 * Secondary title settings field HTML markup
-     *
+	 *
 	 * @return void
 	 */
 	public function sut_banner_secondary_title_callback() {
@@ -216,8 +231,8 @@ class SUT_Settings {
 	}
 
 	/**
-     * "Banner Text" settings field HTML markup
-     *
+	 * "Banner Text" settings field HTML markup
+	 *
 	 * @return void
 	 */
 	public function sut_banner_text_field_callback() {
@@ -233,6 +248,47 @@ class SUT_Settings {
             <small><em><?php _e( 'Type in the paragraph text that should be visible on the homepage', SUT_Games::get_text_domain() ); ?></em></small>
         </div>
 		<?php
+	}
+
+	/**
+	 * @return void
+	 */
+	public function sut_banner_image_field_callback() {
+		$banner_image_id = get_option( 'sut_banner_image_url' );
+		?>
+        <div class="form-field">
+
+			<?php if ( $image = wp_get_attachment_image( $banner_image_id ) ) : ?>
+                <a href="#" class="sup-upload"><?php echo $image ?></a>
+                <a href="#" class="sup-remove"><?php _e( 'Remove image', SUT_Games::get_text_domain() ); ?></a>
+                <input type="hidden" name="sup_img" value="<?php echo absint( $banner_image_id ) ?>">
+			<?php else : ?>
+                <a href="#" class="button sup-upload"><?php _e( 'Upload image', SUT_Games::get_text_domain() ); ?></a>
+                <a href="#" class="sut-remove" style="display:none"><?php _e( 'Remove image', SUT_Games::get_text_domain() ); ?></a>
+                <input type="hidden" name="sut_banner_image_url" id="sut_banner_image" value="<?php echo $banner_image_id; ?>">
+			<?php endif; ?>
+        </div>
+
+		<?php
+	}
+
+	public function enqueue_admin_assets() {
+		// WordPress media uploader scripts
+		if ( ! did_action( 'wp_enqueue_media' ) ) {
+			wp_enqueue_media();
+		}
+
+		// our custom JS
+		wp_enqueue_script(
+			'sut-admin-script',
+			get_template_directory_uri() . '/assets/js/admin-scripts.js',
+			array( 'jquery' ),
+			SUT_Games::get_version(),
+			array(
+				'strategy'  => 'async',
+				'in_footer' => 'true',
+			)
+		);
 	}
 
 
