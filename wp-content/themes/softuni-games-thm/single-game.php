@@ -72,10 +72,7 @@ use SUP_Games\SUP_Games;
                                 <span>Genre:</span>
 								<?php
 
-								$terms = get_terms( array(
-									'taxonomy'   => 'game_genre',
-									'hide_empty' => true,
-								) );
+								$terms = get_the_terms( $post->ID, 'game_genre' );
 
 								if ( $terms ) {
 									$term_links = [];
