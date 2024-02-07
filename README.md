@@ -17,6 +17,8 @@ The project contains a custom-built theme and plugin for WordPress.
 
 ### [LIVE DEMO](https://softuni.dmarinovdev.com)
 
+#### [Github Repository](https://github.com/thegrudge87/softuni-wordpress/)
+
 &nbsp;
 
 ### Theme
