@@ -1,14 +1,40 @@
 # SoftUni Games [Course Theme & Plugin]
 
-Course Theme for the ["WordPress for Developers – ноември 2023"](https://softuni.bg/trainings/4388/wordpress-for-developers-november-2023)
+---
+
+![Theme Version](https://img.shields.io/badge/Theme_Version-0.1.0-blue)&nbsp;&nbsp;&nbsp;
+![Plugin Version](https://img.shields.io/badge/Plugin_Version-0.1.0-8A2BE2)&nbsp;&nbsp;&nbsp;
+![WordPress Version Required](https://img.shields.io/badge/WordPress-6.0_or_higher-red)&nbsp;&nbsp;&nbsp;
+![PHP version required](https://img.shields.io/badge/PHP-7.4_or_higher-red)
+
+[![Static Badge](https://img.shields.io/badge/Demo_Website-Yes-168363)](https://softuni.dmarinovdev.com)
 
 ---
 
 ## Overview
-A project for an online course in SoftUni. The project contain a custom build theme & plugin for WordPress.
+A project for an online course in SoftUni ["WordPress for Developers – ноември 2023"](https://softuni.bg/trainings/4388/wordpress-for-developers-november-2023). <br>
+The project contain a custom build theme & plugin for WordPress.
 
-The theme is based on a free template (check the References section). It covers the basics of a custom theme and in an addition a custom post type template.
-The plugin on itself adds a custom post type for Games with custom taxonomy as well. 
+### [LIVE DEMO](https://softuni.dmarinovdev.com)
+
+&nbsp;
+
+### Theme
+The theme is based on a free template (check the [References](#references) section). It covers the basics of a custom theme and in an addition a custom post type template.
+Theme has a separate options page, where the user can configure the banner on the front-page.
+Theme supports:
+- Website custom logo (if no logo is selected, the website name will be displayed on its place)
+- One Primary menu
+- Post Thumbnails
+- 3 Footer widget areas
+- "Game CPT" provided from "SoftUni Game" plugin
+
+### Plugin
+The plugin adds a custom post type for "Games" with custom taxonomy as well. The custom taxonomy has custom field added for thumbnail.
+
+The plugin was its own settings page, were the user can choose for the Game CPT 
+- how many posts should be displayed per page 
+- how may posts should be listed as related games using the custom field from `ACF plugin`.    
 
 ### References
 * Source HTML Template - https://templatemo.com/tm-589-lugx-gaming 
