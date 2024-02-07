@@ -15,7 +15,7 @@ if ( ! class_exists( 'SUP_Games' ) ) :
 
 	class SUP_Games {
 		private static $text_domain = 'softuni-games-plg';
-		private static $version = '0.1.0';
+		private static $version = '1.0.0';
 
 		public function __construct() {
 

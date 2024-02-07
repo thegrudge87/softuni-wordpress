@@ -10,7 +10,7 @@ use SUT_Games\SUT_Settings;
  */
 class SUT_Games {
 	private static $text_domain = 'sut-games';
-	private static $version = '0.1.0';
+	private static $version = '1.0.0';
 
 	public function __construct() {
 

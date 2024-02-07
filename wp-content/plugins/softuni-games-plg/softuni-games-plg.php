@@ -3,7 +3,7 @@
 /**
  * Plugin Name:       SoftUni Games
  * Description:       A custom Plugin for the "WordPress for Developers – ноември 2023" course
- * Version:           0.1.0-beta
+ * Version:           1.0.0
  * Requires at least: 5.9
  * Requires PHP:      7.3
  * Author:            Dimitar Marinov

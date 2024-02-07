@@ -2,8 +2,8 @@
 
 ---
 
-![Theme Version](https://img.shields.io/badge/Theme_Version-0.1.0-blue)&nbsp;&nbsp;&nbsp;
-![Plugin Version](https://img.shields.io/badge/Plugin_Version-0.1.0-8A2BE2)&nbsp;&nbsp;&nbsp;
+![Theme Version](https://img.shields.io/badge/Theme_Version-1.0.0-blue)&nbsp;&nbsp;&nbsp;
+![Plugin Version](https://img.shields.io/badge/Plugin_Version-1.0.0-8A2BE2)&nbsp;&nbsp;&nbsp;
 ![WordPress Version Required](https://img.shields.io/badge/WordPress-6.0_or_higher-red)&nbsp;&nbsp;&nbsp;
 ![PHP version required](https://img.shields.io/badge/PHP-7.4_or_higher-red)
 
@@ -13,28 +13,28 @@
 
 ## Overview
 A project for an online course in SoftUni ["WordPress for Developers – ноември 2023"](https://softuni.bg/trainings/4388/wordpress-for-developers-november-2023). <br>
-The project contain a custom build theme & plugin for WordPress.
+The project contains a custom-built theme and plugin for WordPress.
 
 ### [LIVE DEMO](https://softuni.dmarinovdev.com)
 
 &nbsp;
 
 ### Theme
-The theme is based on a free template (check the [References](#references) section). It covers the basics of a custom theme and in an addition a custom post type template.
-Theme has a separate options page, where the user can configure the banner on the front-page.
-Theme supports:
-- Website custom logo (if no logo is selected, the website name will be displayed on its place)
-- One Primary menu
+The theme is based on a free template (check the [References](#references) section). 
+It covers the basics of a custom theme and, in addition, includes a custom post type template. The theme has a separate options page where the user can configure the banner on the front page. 
+The theme supports:
+- Website custom logo (if no logo is selected, the website name will be displayed in its place)
+- One primary menu
 - Post Thumbnails
 - 3 Footer widget areas
 - "Game CPT" provided from "SoftUni Game" plugin
 
 ### Plugin
-The plugin adds a custom post type for "Games" with custom taxonomy as well. The custom taxonomy has custom field added for thumbnail.
+The plugin adds a custom post type for "Games" with a custom taxonomy as well. The custom taxonomy has a custom field added for thumbnails.
 
-The plugin was its own settings page, were the user can choose for the Game CPT 
-- how many posts should be displayed per page 
-- how may posts should be listed as related games using the custom field from `ACF plugin`.    
+The plugin has its own settings page, where the user can choose for the Game CPT:
+- How many posts should be displayed per page 
+- How many posts should be listed as related games using the custom field from the `ACF plugin`.   
 
 ### References
 * Source HTML Template - https://templatemo.com/tm-589-lugx-gaming 
