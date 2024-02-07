@@ -2,6 +2,8 @@
 
 namespace SUP_Games;
 
+if ( ! class_exists( 'SUP_Settings' ) ) :
+
 class SUP_Settings {
 
 	private $main_menu_slug = 'softuni-games-options';
@@ -12,14 +14,14 @@ class SUP_Settings {
 		add_action( 'admin_menu', array( $this, 'menu_page_register' ) );
 		add_action( 'admin_init', array( $this, 'register_plugin_settings' ) );
 
-		add_filter( 'pre_get_posts', array($this, 'number_of_games_on_archive') );
+		add_filter( 'pre_get_posts', array( $this, 'number_of_games_on_archive' ) );
 
 	}
 
 
 	/**
-     * Register menu page and sub-menu pages
-     *
+	 * Register menu page and sub-menu pages
+	 *
 	 * @return void
 	 */
 	public function menu_page_register() {
@@ -32,7 +34,7 @@ class SUP_Settings {
 				'manage_options',
 				$this->main_menu_slug,
 				array( $this, 'menu_page_content' ),
-				plugins_url( 'softuni-games-plg/assets/images/softuni-wizard-logo.png',  ),
+				plugins_url( 'softuni-games-plg/assets/images/softuni-wizard-logo.png', ),
 			);
 		}
 
@@ -143,7 +145,7 @@ class SUP_Settings {
 			'sut_general_options',
 			array( 'label_for' => 'sut_show_games_per_page' )
 		);
-    }
+	}
 
 
 	/**
@@ -154,7 +156,7 @@ class SUP_Settings {
 	public function number_of_games_on_archive( $query ) {
 
 		if ( is_post_type_archive( array( 'game' ) ) ) {
-			$query->set( 'posts_per_page', get_option('sut_show_games_per_page') ?: 6 );
+			$query->set( 'posts_per_page', get_option( 'sut_show_games_per_page' ) ?: 6 );
 		}
 
 		return $query;
@@ -174,12 +176,12 @@ class SUP_Settings {
 	}
 
 	/**
-     * Number of related games settings field HTML markup
-     *
+	 * Number of related games settings field HTML markup
+	 *
 	 * @return void
 	 */
-	public function sut_show_max_related_games_callback(  ) {
-		$max_games = get_option('sut_show_max_related_games');
+	public function sut_show_max_related_games_callback() {
+		$max_games = get_option( 'sut_show_max_related_games' );
 		?>
         <div><input type="number" name="sut_show_max_related_games" id="sut_show_max_related_games"
                     value="<?php echo $max_games; ?>"/></div>
@@ -190,12 +192,12 @@ class SUP_Settings {
 	}
 
 	/**
-     * "Games per page" settings field HTML markup
-     *
+	 * "Games per page" settings field HTML markup
+	 *
 	 * @return void
 	 */
-	public function sut_show_games_per_page_callback(  ) {
-		$max_games = get_option('sut_show_games_per_page');
+	public function sut_show_games_per_page_callback() {
+		$max_games = get_option( 'sut_show_games_per_page' );
 		?>
         <div><input type="number" name="sut_show_games_per_page" id="sut_show_games_per_page"
                     value="<?php echo $max_games; ?>"/></div>
@@ -206,3 +208,5 @@ class SUP_Settings {
 	}
 
 }
+
+endif;

@@ -2,6 +2,7 @@
 
 namespace SUP_Games;
 
+if ( ! class_exists( 'SUP_Settings' ) ) :
 
 class SUP_Shortcodes {
 
@@ -44,20 +45,23 @@ class SUP_Shortcodes {
                     </div>
                 </div>';
 
-		while ($games->have_posts() ){
+		while ( $games->have_posts() ) {
 			$games->the_post();
 
-			$genres = wp_get_post_terms(get_the_ID(), 'game_genre');
-			$genre = $genres ? $genres[0]->name : '';
+			$genres = wp_get_post_terms( get_the_ID(), 'game_genre' );
+			$genre  = $genres ? $genres[0]->name : '';
 			$output .= '<div class="col-lg-2 col-md-6 col-sm-6">
                     <div class="item">
                         <div class="thumb">
-                            <a href="'. get_post_permalink() .'">'. get_the_post_thumbnail(null, array(196, 196)) .'</a>
+                            <a href="' . get_post_permalink() . '">' . get_the_post_thumbnail( null, array(
+					196,
+					196
+				) ) . '</a>
                         </div>
                         <div class="down-content">
-                            <span class="category">'. $genre .'</span>
-                            <h4>'. get_the_title() .'</h4>
-                            <a href="'. get_post_permalink() .'">'. __('Explore', SUP_Games::get_text_domain()) .'</a>
+                            <span class="category">' . $genre . '</span>
+                            <h4>' . get_the_title() . '</h4>
+                            <a href="' . get_post_permalink() . '">' . __( 'Explore', SUP_Games::get_text_domain() ) . '</a>
                         </div>
                     </div>
                 </div>';
@@ -70,3 +74,5 @@ class SUP_Shortcodes {
 	}
 
 }
+
+endif;

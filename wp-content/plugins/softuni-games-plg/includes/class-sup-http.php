@@ -2,6 +2,9 @@
 
 namespace SUP_Games;
 
+if ( ! class_exists( 'SUP_Http' ) ) :
+
+
 class SUP_Http {
 
 	public function __construct() {
@@ -60,8 +63,8 @@ class SUP_Http {
 			return;
 		}
 
-		$meta_key = 'num_of_likes';
-		$post_id = esc_attr( $_POST['post_id'] );
+		$meta_key           = 'num_of_likes';
+		$post_id            = esc_attr( $_POST['post_id'] );
 		$user_current_likes = $this->get_likes_cookie_data();
 
 		// Check do we have the post_id in the like_cookie array
@@ -102,3 +105,5 @@ class SUP_Http {
 	}
 
 }
+
+endif;
