@@ -2,6 +2,7 @@
 
 use SUT_Games\SUT_Settings;
 
+if ( ! class_exists( 'SUT_Games' ) ) :
 /**
  * @desc  General class for the Theme details.
  *
@@ -140,3 +141,5 @@ class SUT_Games {
 
 	}
 }
+
+endif;

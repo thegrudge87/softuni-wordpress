@@ -4,6 +4,8 @@ namespace SUT_Games;
 
 use SUT_Games;
 
+if ( ! class_exists( 'SUT_Settings' ) ) :
+
 class SUT_Settings {
 
 	/**
@@ -264,8 +266,10 @@ class SUT_Settings {
                 <input type="hidden" name="sup_img" value="<?php echo absint( $banner_image_id ) ?>">
 			<?php else : ?>
                 <a href="#" class="button sup-upload"><?php _e( 'Upload image', SUT_Games::get_text_domain() ); ?></a>
-                <a href="#" class="sut-remove" style="display:none"><?php _e( 'Remove image', SUT_Games::get_text_domain() ); ?></a>
-                <input type="hidden" name="sut_banner_image_url" id="sut_banner_image" value="<?php echo $banner_image_id; ?>">
+                <a href="#" class="sut-remove"
+                   style="display:none"><?php _e( 'Remove image', SUT_Games::get_text_domain() ); ?></a>
+                <input type="hidden" name="sut_banner_image_url" id="sut_banner_image"
+                       value="<?php echo $banner_image_id; ?>">
 			<?php endif; ?>
         </div>
 
@@ -291,5 +295,6 @@ class SUT_Settings {
 		);
 	}
 
-
 }
+
+endif;
