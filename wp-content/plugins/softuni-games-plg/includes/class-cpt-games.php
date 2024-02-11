@@ -228,7 +228,7 @@ if ( ! class_exists( 'CPT_Games' ) ) :
 			add_meta_box(
 				'num_of_likes',
 				__( 'Number of Likes', SUP_Games::get_text_domain() ),
-				array( $this, 'robots_likes_metabox_callback' ),
+				array( $this, 'likes_metabox_callback' ),
 				'game',
 				'side'
 			);
@@ -236,7 +236,7 @@ if ( ! class_exists( 'CPT_Games' ) ) :
 			add_meta_box(
 				'is_trending',
 				__( 'Is Trending?', SUP_Games::get_text_domain() ),
-				array( $this, 'robots_trending_metabox_callback' ),
+				array( $this, 'trending_metabox_callback' ),
 				'game',
 				'side'
 			);
@@ -249,7 +249,7 @@ if ( ! class_exists( 'CPT_Games' ) ) :
 		 *
 		 * @return void
 		 */
-		public function robots_likes_metabox_callback( WP_Post $post ) {
+		public function likes_metabox_callback( WP_Post $post ) {
 
 			// Get post data if there is, or set as 0 (zero)
 			$num_of_likes = get_post_meta( $post->ID, 'num_of_likes', true ) ?: 0;
@@ -295,7 +295,7 @@ if ( ! class_exists( 'CPT_Games' ) ) :
 		 *
 		 * @return void
 		 */
-		public function robots_trending_metabox_callback( WP_Post $post ) {
+		public function rending_metabox_callback( WP_Post $post ) {
 			$checked = get_post_meta( $post->ID, 'is_trending', true );
 			?>
             <div>
